@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
-  console.log("Regenerating static script");
+  console.log("Regenerating script");
 
   return new NextResponse(`hello world`, {
     headers: {
