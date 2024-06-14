@@ -6,5 +6,5 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
   revalidatePath(`/api/script`);
 
-  return new NextResponse();
+  return new NextResponse("purged /api/script");
 }
