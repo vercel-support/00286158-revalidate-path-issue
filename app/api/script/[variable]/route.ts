@@ -7,9 +7,7 @@ export async function GET(
   console.log("Regenerating script with variable", params.params.variable);
 
   return new NextResponse(
-    `hello variable ${
-      params.params.variable
-    } ; date: ${new Date().toLocaleDateString()}`,
+    `hello variable ${params.params.variable} ; date: ${Date.now()}`,
     {
       headers: {
         "Vercel-CDN-Cache-Control": "max-age=86400", // 1 day
