@@ -6,9 +6,14 @@ export async function GET(
 ): Promise<NextResponse> {
   console.log("Regenerating script with variable", params.params.variable);
 
-  return new NextResponse(`hello variable ${params.params.variable}`, {
-    headers: {
-      "Vercel-CDN-Cache-Control": "max-age=86400", // 1 day
-    },
-  });
+  return new NextResponse(
+    `hello variable ${
+      params.params.variable
+    } ; date: ${new Date().toLocaleDateString()}`,
+    {
+      headers: {
+        "Vercel-CDN-Cache-Control": "max-age=86400", // 1 day
+      },
+    }
+  );
 }
