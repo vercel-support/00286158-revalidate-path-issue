@@ -4,10 +4,11 @@ export async function GET(
   request: NextRequest,
   params: { params: { variable: string } }
 ): Promise<NextResponse> {
-  const hostname = request.nextUrl.hostname;
+  const url = request.nextUrl.clone();
+  url.pathname = `/api/script/${params.params.variable}`;
 
   // first tag the cache
-  await fetch(new URL(`/api/script/${params.params.variable}`, hostname), {
+  await fetch(url, {
     next: { tags: [params.params.variable] },
   });
 
