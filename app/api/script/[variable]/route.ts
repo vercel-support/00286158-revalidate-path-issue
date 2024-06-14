@@ -1,0 +1,14 @@
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(
+  request: NextRequest,
+  params: { params: { variable: string } }
+): Promise<NextResponse> {
+  console.log("Regenerating script");
+
+  return new NextResponse(`hello variable ${params.params.variable}`, {
+    headers: {
+      "Vercel-CDN-Cache-Control": "max-age=86400", // 1 day
+    },
+  });
+}
