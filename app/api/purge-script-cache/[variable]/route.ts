@@ -1,4 +1,4 @@
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -7,7 +7,7 @@ export async function GET(
 ): Promise<NextResponse> {
   console.log("Purge variable script cache");
 
-  revalidatePath(`/api/script/[variable]`, "page");
+  revalidateTag(params.params.variable);
 
   return new NextResponse(`purged /api/script/${params.params.variable}`);
 }
