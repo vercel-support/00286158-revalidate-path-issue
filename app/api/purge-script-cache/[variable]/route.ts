@@ -7,7 +7,9 @@ export async function GET(
 ): Promise<NextResponse> {
   console.log("Purge variable script cache");
 
-  revalidatePath(`/api/script/${params.params.variable}`);
+  // revalidatePath(`/api/script/${params.params.variable}`);
+  revalidatePath(`/api/script/[variable]`);
 
-  return new NextResponse(`purged /api/script/${params.params.variable}`);
+  // return new NextResponse(`purged /api/script/${params.params.variable}`);
+  return new NextResponse(`purged /api/script/[variable]`);
 }
