@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const revalidate = 600;
 
+export const generateStaticParams = async () => [];
+
 export async function GET(
   request: NextRequest,
   params: { params: { variable: string } }
@@ -15,7 +17,7 @@ export async function GET(
   console.log('Fetched posts', posts);
 
   return new NextResponse(
-    `hello variable ${params.params.variable} ; date: ${Date.now()}`,
+    `hello variable ${params.params.variable} ; date: ${Date.now()}`
     // {
     //   status: 200,
     //   headers: {
