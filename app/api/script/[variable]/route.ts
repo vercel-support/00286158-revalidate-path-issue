@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export const revalidate = 600; // 1 day
-export const dynamic = 'force-static';
-
 export async function GET(
   request: NextRequest,
   params: { params: { variable: string } }
