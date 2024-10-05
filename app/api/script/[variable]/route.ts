@@ -14,7 +14,11 @@ export async function GET(
 ): Promise<NextResponse> {
   console.log('Regenerating script with variable', params.params.variable);
 
-  const posts = await fetch('https://jsonplaceholder.org/posts').then((res) =>
+  const posts = await fetch('https://jsonplaceholder.org/posts', {
+    next: {
+      revalidate: 600,
+    }
+  }).then((res) =>
     res.json()
   );
 
