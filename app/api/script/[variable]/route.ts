@@ -2,7 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const revalidate = 600;
 
-export const generateStaticParams = async () => [];
+export const generateStaticParams = async () => [
+  {
+    variable: 'test',
+  },
+];
 
 export async function GET(
   request: NextRequest,
