@@ -9,9 +9,9 @@ export async function GET(
   return new NextResponse(
     `hello variable ${params.params.variable} ; date: ${Date.now()}`,
     {
-      headers: {
-        "Vercel-CDN-Cache-Control": "max-age=86400", // 1 day
-      },
+      // headers: {
+      //   "Vercel-CDN-Cache-Control": "max-age=86400", // 1 day
+      // },
     }
   );
 }
