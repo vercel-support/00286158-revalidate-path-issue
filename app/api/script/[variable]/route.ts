@@ -25,7 +25,7 @@ async function fetchScriptContent(variable: string) {
 // }
 
 export const dynamic = 'force-dynamic';
-export const revalidate = 3600; // Cache for 1 hour
+export const revalidate = 30; // Cache for 30 seconds
 
 export async function GET(
   request: NextRequest,
@@ -37,7 +37,7 @@ export async function GET(
       status: 200,
       headers: {
         'Content-Type': 'text/plain',
-        // 'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
       },
     });
   } catch (error) {
