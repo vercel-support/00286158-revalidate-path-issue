@@ -25,7 +25,7 @@ export default async function handler(
   try {
     // console.log(req.query.variable);
     
-    res.revalidate(`/api/script/${req.query.variable}`);
+    await res.revalidate(`/api/script/${req.query.variable}`);
 
     res.status(200).json({ revalidated: true });
   } catch (err) {

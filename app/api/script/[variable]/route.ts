@@ -6,11 +6,11 @@ export async function GET(
 ): Promise<NextResponse> {
   console.log('Regenerating script with variable', params.params.variable);
 
-  const posts = await fetch('https://jsonplaceholder.org/posts').then((res) =>
-    res.json()
-  );
+  // const posts = await fetch('https://jsonplaceholder.org/posts').then((res) =>
+  //   res.json()
+  // );
 
-  console.log('Post1:', posts[0]);
+  // console.log('Post1:', posts[0]);
 
   return new NextResponse(
     `hello variable ${params.params.variable} ; date: ${Date.now()}`,
