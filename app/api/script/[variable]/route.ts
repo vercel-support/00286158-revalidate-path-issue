@@ -5,7 +5,7 @@ async function fetchScriptContent(variable: string) {
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${variable}`,
     {
-      next: { tags: [`script-${variable}`], revalidate: 60 },
+      next: { tags: [`script-${variable}`], revalidate: false },
     }
   );
   const data = await res.json();
@@ -36,9 +36,9 @@ export async function GET(
 // }
 
 export const dynamic = 'force-static';
-export const revalidate = 60;
+export const revalidate = false;
 export const dynamicParams = false;
 
-// export function generateStaticParams() {
-//   return [{ variable: '1' }, { variable: '2' }, { variable: '3' }];
-// }
+export function generateStaticParams() {
+  return [{ variable: '1' }, { variable: '2' }, { variable: '3' }];
+}
