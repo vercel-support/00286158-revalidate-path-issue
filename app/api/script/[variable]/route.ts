@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export const revalidate = false;
-export const dynamic = 'force-static';
-export const dynamicParams = true;
-export const generateStaticParams = async () => [];
+// export const revalidate = false;
+// export const dynamic = 'force-static';
+// export const dynamicParams = true;
+// export const generateStaticParams = async () => [];
 
 export async function GET(
   request: NextRequest,
@@ -21,11 +21,11 @@ export async function GET(
   console.log('Post1:', posts[0]);
 
   return new NextResponse(
-    `hello variable ${params.params.variable} ; date: ${Date.now()}`
-    // {
-    //   headers: {
-    //     'Vercel-CDN-Cache-Control': 'max-age=86400', // 1 day
-    //   },
-    // }
+    `hello variable ${params.params.variable} ; date: ${Date.now()}`,
+    {
+      headers: {
+        'Vercel-CDN-Cache-Control': 'max-age=86400', // 1 day
+      },
+    }
   );
 }
