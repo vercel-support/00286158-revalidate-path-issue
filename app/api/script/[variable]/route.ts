@@ -3,31 +3,45 @@ import { NextRequest, NextResponse } from 'next/server';
 async function fetchScriptContent(variable: string) {
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${variable}`,
-    {
-      next: { tags: [`script-${variable}`], revalidate: 600 },
-    }
+    // {
+    //   next: { tags: [`script-${variable}`], revalidate: 600 },
+    // }
   );
   const data = await res.json();
   return JSON.stringify(data);
 }
 
+// export async function GET(
+//   request: NextRequest,
+//   { params }: { params: { variable: string } }
+// ) {
+//   const scriptContent = await fetchScriptContent(params.variable);
+
+//   return new NextResponse(scriptContent, {
+//     headers: {
+//       'Content-Type': 'text/plain',
+//     },
+//   });
+// }
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Cache for 1 hour
+
 export async function GET(
   request: NextRequest,
-  { params }: { params: { variable: string } }
+  { params }: { params: { parameter: string } }
 ) {
-  const scriptContent = await fetchScriptContent(params.variable);
-
-  return new NextResponse(scriptContent, {
-    headers: {
-      'Content-Type': 'text/plain',
-    },
-  });
+  try {
+    const script = await fetchScriptContent(params.parameter);
+    return new NextResponse(script, {
+      status: 200,
+      headers: {
+        'Content-Type': 'text/plain',
+        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+      },
+    });
+  } catch (error) {
+    console.error('Error fetching script:', error);
+    return new NextResponse('Error fetching script', { status: 500 });
+  }
 }
-
-export const dynamic = 'force-static';
-export const revalidate = 600;
-export const dynamicParams = false;
-
-// export function generateStaticParams() {
-//   return [{ variable: '1' }, { variable: '2' }, { variable: '3' }];
-// }
