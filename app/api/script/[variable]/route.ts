@@ -24,20 +24,20 @@ async function fetchScriptContent(variable: string) {
 //   });
 // }
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 export const revalidate = 30; // Cache for 30 seconds
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { parameter: string } }
+  { params }: { params: { variable: string } }
 ) {
   try {
-    const script = await fetchScriptContent(params.parameter);
+    const script = await fetchScriptContent(params.variable);
     return new NextResponse(script, {
       status: 200,
       headers: {
         'Content-Type': 'text/plain',
-        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+        // 'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
       },
     });
   } catch (error) {
