@@ -14,6 +14,7 @@ export async function GET(
   const posts = await fetch('https://jsonplaceholder.org/posts', {
     next: {
       revalidate: 600,
+      tags: [params.params.variable],
     },
   }).then((res) => res.json());
 
