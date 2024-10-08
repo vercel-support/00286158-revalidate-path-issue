@@ -23,9 +23,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    console.log(req.query.variable);
+    // console.log(req.query.variable);
     
-    await res.revalidate(`/api/script/${req.query.variable}`);
+    res.revalidate(`/api/script/${req.query.variable}`);
 
     res.status(200).json({ revalidated: true });
   } catch (err) {
