@@ -37,7 +37,7 @@ export async function GET(
       status: 200,
       headers: {
         'Content-Type': 'text/plain',
-        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+        // 'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
       },
     });
   } catch (error) {
