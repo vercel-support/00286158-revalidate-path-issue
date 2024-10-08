@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export const revalidate = 600;
+export const revalidate = false;
 export const dynamic = 'force-static';
 export const dynamicParams = true;
 export const generateStaticParams = async () => [];
@@ -13,7 +13,7 @@ export async function GET(
 
   const posts = await fetch('https://jsonplaceholder.org/posts', {
     next: {
-      revalidate: 600,
+      revalidate: false,
       tags: [params.params.variable],
     },
   }).then((res) => res.json());
