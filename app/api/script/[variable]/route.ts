@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const revalidate = false;
 export const dynamic = 'force-static';
+export const dynamicParams = true;
+export const generateStaticParams = async () => [];
 
 export async function GET(
   request: NextRequest,
