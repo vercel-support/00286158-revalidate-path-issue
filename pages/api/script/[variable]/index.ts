@@ -27,7 +27,7 @@ export default async function handler(
   //   }
   // );
 
-  res.setHeader('Vercel-CDN-Cache-Control', 'max-age=86400'); // 1 day
+  // res.setHeader('Vercel-CDN-Cache-Control', 'max-age=86400'); // 1 day
 
   res
     .status(200)
