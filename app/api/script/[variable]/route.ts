@@ -13,7 +13,6 @@ async function fetchScriptContent(variable: string) {
   const data = await res.json();
   return JSON.stringify(data);
 }
-// export const revalidate = 86400; // Cache for 1 day
 
 export async function GET(
   request: NextRequest,

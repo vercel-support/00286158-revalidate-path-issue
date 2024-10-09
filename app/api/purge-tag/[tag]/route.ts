@@ -6,7 +6,6 @@ export async function GET(
   params: { params: { tag: string } }
 ) {
   revalidateTag(params.params.tag);
-
   return Response.json({
     revalidated: true,
     now: Date.now(),
