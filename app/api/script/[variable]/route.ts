@@ -1,33 +1,32 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { unstable_cache } from 'next/cache';
 
-async function fetchScriptContent(variable: string) {
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${variable}`,
+export const runtime = 'edge';
+
+function getCachedScriptById(id: string) {
+  const data = unstable_cache(
+    async (id: string) => {
+      const script = await generateScript(id);
+
+      return script;
+    },
+    undefined,
     {
-      next: {
-        tags: [variable],
-        revalidate: 86400,
-      },
+      tags: [id],
     }
-  );
-  const data = await res.json();
-  return JSON.stringify(data);
+  )(id);
+
+  return data;
+}
+
+async function generateScript(id: string) {
+  return `script ${id} - ${new Date().toISOString()}`;
 }
 
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { variable: string } }
+  request: Request,
+  { params: { variable } }: { params: { variable: string } }
 ) {
-  try {
-    const script = await fetchScriptContent(params.variable);
-    return new NextResponse(script, {
-      status: 200,
-      headers: {
-        'Content-Type': 'text/plain',
-      },
-    });
-  } catch (error) {
-    console.error('Error fetching script:', error);
-    return new NextResponse('Error fetching script', { status: 500 });
-  }
+  const data = await getCachedScriptById(variable);
+
+  return new Response(data);
 }
